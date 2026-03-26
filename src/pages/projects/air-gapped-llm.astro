@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Air-Gapped Incident Triage LLM — Isra Sunhachawi">
   <article class="max-w-4xl mx-auto px-6 py-20">
 
     <div class="mb-4 animate-fade-in-up">
-      <a href="/projects" class="font-mono text-sm transition-colors" style="color:#7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">← projects/</a>
+      <a href={`${base}projects`} class="font-mono text-sm transition-colors" style="color:#7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">← projects/</a>
     </div>
 
     <div class="mb-10 animate-fade-in-up">
