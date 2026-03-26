@@ -3,24 +3,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const certGroups = [
   {
-    domain: 'Security',
+    domain: 'Kubernetes & DevOps',
     color: 'gold',
     certs: [
-      { name: 'Add your security certifications', issuer: '', date: '', badge: null },
+      { name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '' },
+      { name: 'Certified Kubernetes Application Developer (CKAD)', issuer: 'CNCF', date: '' },
+      { name: 'Certified Scrum Product Owner (CSPO)', issuer: 'Scrum Alliance', date: '' },
     ],
   },
   {
     domain: 'Cloud',
     color: 'emerald',
     certs: [
-      { name: 'Add your cloud certifications', issuer: '', date: '', badge: null },
+      { name: 'AWS Solutions Architect – Associate', issuer: 'Amazon Web Services', date: '' },
+      { name: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', date: '' },
+      { name: 'Azure Fundamentals (AZ-900)', issuer: 'Microsoft', date: '' },
     ],
   },
   {
-    domain: 'AI / ML',
+    domain: 'Security & Observability',
     color: 'coral',
     certs: [
-      { name: 'Add your AI certifications', issuer: '', date: '', badge: null },
+      { name: 'Security+', issuer: 'CompTIA', date: '' },
+      { name: 'Elastic Certified Engineer', issuer: 'Elastic', date: '' },
+      { name: 'Elastic Certified Observability Engineer', issuer: 'Elastic', date: '' },
     ],
   },
 ];
@@ -61,11 +67,6 @@ const certGroups = [
       ))}
     </div>
 
-    <div class="glass-card p-6 mt-12 animate-fade-in-up" style="border-color:rgba(212,160,23,0.2);">
-      <p class="text-sm" style="color:#7A8BA8;">
-        <span style="color:#D4A017;">Note:</span> Add your certifications by updating <code class="font-mono text-xs px-1 py-0.5 rounded" style="background:rgba(255,255,255,0.05);">src/pages/certifications.astro</code> with your Credly badge URLs and verification links.
-      </p>
-    </div>
 
   </section>
 </BaseLayout>
