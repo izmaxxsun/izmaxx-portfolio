@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Isra Sunhachawi — DevSecOps & AI Practitioner">
@@ -45,13 +45,13 @@ const base = import.meta.env.BASE_URL;
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 animate-fade-in-up animate-delay-400">
-        <a href={`${base}projects`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200" style="background: linear-gradient(135deg, #D4A017, #F0C040); color: #0B1120;">
+        <a href={`${base}/projects`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200" style="background: linear-gradient(135deg, #D4A017, #F0C040); color: #0B1120;">
           View Projects
         </a>
-        <a href={`${base}blog`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 glass-card" style="color:#D4A017; border-color: rgba(212,160,23,0.3);" onmouseover="this.style.borderColor='rgba(212,160,23,0.6)'" onmouseout="this.style.borderColor='rgba(212,160,23,0.3)'">
+        <a href={`${base}/blog`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 glass-card" style="color:#D4A017; border-color: rgba(212,160,23,0.3);" onmouseover="this.style.borderColor='rgba(212,160,23,0.6)'" onmouseout="this.style.borderColor='rgba(212,160,23,0.3)'">
           Read the Blog
         </a>
-        <a href={`${base}contact`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200" style="color:#7A8BA8;" onmouseover="this.style.color='#E8EDF5'" onmouseout="this.style.color='#7A8BA8'">
+        <a href={`${base}/contact`} class="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200" style="color:#7A8BA8;" onmouseover="this.style.color='#E8EDF5'" onmouseout="this.style.color='#7A8BA8'">
           Get in Touch →
         </a>
       </div>
@@ -74,12 +74,12 @@ const base = import.meta.env.BASE_URL;
   <section class="max-w-6xl mx-auto px-6 pb-24">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-2xl font-bold" style="color:#E8EDF5;">Featured Projects</h2>
-      <a href={`${base}projects`} class="text-sm font-medium transition-colors" style="color:#D4A017;" onmouseover="this.style.color='#F0C040'" onmouseout="this.style.color='#D4A017'">View all →</a>
+      <a href={`${base}/projects`} class="text-sm font-medium transition-colors" style="color:#D4A017;" onmouseover="this.style.color='#F0C040'" onmouseout="this.style.color='#D4A017'">View all →</a>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6">
 
-      <div class="glass-card p-6 transition-all duration-300 glow-gold group" style="cursor:pointer;" onclick={`window.location='${import.meta.env.BASE_URL}projects/air-gapped-llm'`}>
+      <div class="glass-card p-6 transition-all duration-300 glow-gold group" style="cursor:pointer;" onclick={`window.location='${base}/projects/air-gapped-llm'`}>
         <div class="flex items-start justify-between mb-3">
           <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(212,160,23,0.1); color:#D4A017;">Project 01</span>
           <svg width="16" height="16" fill="none" stroke="#7A8BA8" stroke-width="2" viewBox="0 0 24 24" class="transition-colors group-hover:stroke-[#D4A017]"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -94,7 +94,7 @@ const base = import.meta.env.BASE_URL;
         </div>
       </div>
 
-      <div class="glass-card p-6 transition-all duration-300 glow-emerald group" style="cursor:pointer;" onclick={`window.location='${import.meta.env.BASE_URL}projects/enterprise-knowledge-guardrails'`}>
+      <div class="glass-card p-6 transition-all duration-300 glow-emerald group" style="cursor:pointer;" onclick={`window.location='${base}/projects/enterprise-knowledge-guardrails'`}>
         <div class="flex items-start justify-between mb-3">
           <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(0,145,110,0.1); color:#10B981;">Project 02</span>
           <svg width="16" height="16" fill="none" stroke="#7A8BA8" stroke-width="2" viewBox="0 0 24 24" class="transition-colors group-hover:stroke-[#10B981]"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
