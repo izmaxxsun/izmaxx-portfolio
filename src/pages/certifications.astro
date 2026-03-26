@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const certGroups = [
+  {
+    domain: 'Security',
+    color: 'gold',
+    certs: [
+      { name: 'Add your security certifications', issuer: '', date: '', badge: null },
+    ],
+  },
+  {
+    domain: 'Cloud',
+    color: 'emerald',
+    certs: [
+      { name: 'Add your cloud certifications', issuer: '', date: '', badge: null },
+    ],
+  },
+  {
+    domain: 'AI / ML',
+    color: 'coral',
+    certs: [
+      { name: 'Add your AI certifications', issuer: '', date: '', badge: null },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Certifications — Isra Sunhachawi">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="mb-12 animate-fade-in-up">
+      <span class="font-mono text-sm" style="color:#D4A017;">$ ls certifications/</span>
+      <h1 class="text-4xl font-bold mt-3 mb-2" style="color:#E8EDF5;">Certifications</h1>
+      <div class="h-1 w-16 rounded" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+      <p class="mt-4 text-sm" style="color:#7A8BA8;">Third-party verified credentials. Click any badge to verify.</p>
+    </div>
+
+    <div class="space-y-10">
+      {certGroups.map((group, i) => (
+        <div class="animate-fade-in-up" style={`animation-delay:${i * 0.1}s; opacity:0;`}>
+          <h2 class="font-bold mb-4" style={`color:${group.color === 'gold' ? '#D4A017' : group.color === 'emerald' ? '#10B981' : '#F08080'};`}>
+            {group.domain}
+          </h2>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {group.certs.map(cert => (
+              <div class="glass-card p-5 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={`background:rgba(${group.color === 'gold' ? '212,160,23' : group.color === 'emerald' ? '0,145,110' : '224,92,92'},0.1);`}>
+                  <svg width="20" height="20" fill="none" stroke={group.color === 'gold' ? '#D4A017' : group.color === 'emerald' ? '#10B981' : '#F08080'} stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium text-sm" style="color:#E8EDF5;">{cert.name}</div>
+                  {cert.issuer && <div class="text-xs mt-1" style="color:#7A8BA8;">{cert.issuer} · {cert.date}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="glass-card p-6 mt-12 animate-fade-in-up" style="border-color:rgba(212,160,23,0.2);">
+      <p class="text-sm" style="color:#7A8BA8;">
+        <span style="color:#D4A017;">Note:</span> Add your certifications by updating <code class="font-mono text-xs px-1 py-0.5 rounded" style="background:rgba(255,255,255,0.05);">src/pages/certifications.astro</code> with your Credly badge URLs and verification links.
+      </p>
+    </div>
+
+  </section>
+</BaseLayout>

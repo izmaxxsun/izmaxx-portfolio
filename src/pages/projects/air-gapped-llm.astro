@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Air-Gapped Incident Triage LLM — Isra Sunhachawi">
+  <article class="max-w-4xl mx-auto px-6 py-20">
+
+    <div class="mb-4 animate-fade-in-up">
+      <a href="/projects" class="font-mono text-sm transition-colors" style="color:#7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">← projects/</a>
+    </div>
+
+    <div class="mb-10 animate-fade-in-up">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(212,160,23,0.1); color:#D4A017;">Project 01</span>
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(224,92,92,0.1); color:#F08080;">In Progress</span>
+      </div>
+      <h1 class="text-4xl font-bold mb-4" style="color:#E8EDF5;">Air-Gapped Incident Triage LLM</h1>
+      <div class="h-1 w-16 rounded mb-6" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+      <div class="flex flex-wrap gap-2">
+        {['Ollama', 'k0s', 'Kubernetes', 'Fine-tuning', 'Harbor', 'DevSecOps', 'Air-Gap', 'Python', 'FastAPI'].map(tag => (
+          <span class="skill-tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="space-y-10">
+
+      <!-- Problem -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-100">
+        <h2 class="font-mono text-sm mb-3" style="color:#D4A017;">THE PROBLEM</h2>
+        <p style="color:#7A8BA8; line-height:1.9;">
+          Security teams are drowning in alerts. AI-assisted triage can dramatically reduce MTTR — but most LLM APIs require sending data to third-party cloud endpoints. In regulated industries (defense, finance, healthcare), this is a non-starter. The data never leaves the perimeter.
+        </p>
+      </div>
+
+      <!-- Architecture -->
+      <div class="animate-fade-in-up animate-delay-200">
+        <h2 class="text-xl font-bold mb-4" style="color:#E8EDF5;">Architecture</h2>
+        <div class="glass-card p-6 font-mono text-sm" style="color:#7A8BA8;">
+          <div style="color:#D4A017;">k0s cluster (air-gapped)</div>
+          <div class="ml-4 mt-2">└── namespace: <span style="color:#10B981;">llm-inference</span></div>
+          <div class="ml-8">├── Ollama (Deployment + PVC)</div>
+          <div class="ml-8">│   └── Fine-tuned Mistral 7B model</div>
+          <div class="ml-8">├── Triage API (FastAPI)</div>
+          <div class="ml-8">│   └── Ingests alerts → Ollama → classified output</div>
+          <div class="ml-8">├── Harbor (private registry)</div>
+          <div class="ml-8">│   └── All images pre-loaded, no pull from internet</div>
+          <div class="ml-8">└── NetworkPolicy</div>
+          <div class="ml-12">└── egress: deny-all (provably air-gapped)</div>
+        </div>
+      </div>
+
+      <!-- Decisions -->
+      <div class="animate-fade-in-up animate-delay-300">
+        <h2 class="text-xl font-bold mb-4" style="color:#E8EDF5;">Key Decisions</h2>
+        <div class="space-y-4">
+          {[
+            {
+              q: 'Why k0s over k3s or vanilla Kubernetes?',
+              a: 'k0s ships as a single binary with no OS-level dependencies, making it ideal for air-gapped installs. Pre-bundling images and transferring via a tarball is straightforward. k3s is comparable but k0s has cleaner support for custom containerd config needed for private registries.',
+            },
+            {
+              q: 'Why Ollama over vLLM or TGI?',
+              a: 'Ollama has the simplest model management for air-gapped environments — models are self-contained GGUF files that can be transferred via USB. vLLM offers higher throughput but adds GPU complexity we don\'t need for async alert triage at this scale.',
+            },
+            {
+              q: 'Why fine-tune vs. prompt engineering alone?',
+              a: 'A base model prompted to classify alerts still hallucinates severity levels on edge-case alert formats. Fine-tuning on real SOC triage data gives consistent structured output and reduces token overhead — important when running on constrained hardware.',
+            },
+            {
+              q: 'Why Harbor over Zot?',
+              a: 'Harbor offers a richer RBAC model and Helm chart support out of the box. Zot is lighter, but the project benefits from Harbor\'s built-in vulnerability scanning integration (Trivy) — turning the registry itself into a security control.',
+            },
+          ].map(({ q, a }) => (
+            <div class="glass-card p-5">
+              <div class="font-semibold mb-2" style="color:#E8EDF5;">{q}</div>
+              <p class="text-sm" style="color:#7A8BA8;">{a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-400" style="border-color:rgba(212,160,23,0.3);">
+        <h2 class="font-mono text-sm mb-3" style="color:#D4A017;">STATUS</h2>
+        <div class="space-y-2">
+          {[
+            ['done', 'k0s cluster bootstrapped, air-gap validated (zero egress confirmed)'],
+            ['done', 'Harbor private registry deployed, containerd mirror configured'],
+            ['done', 'Ollama running on cluster, base Mistral 7B model loaded'],
+            ['progress', 'Training data curation from SOC alert logs'],
+            ['todo', 'Fine-tuning run + evaluation harness'],
+            ['todo', 'FastAPI triage service + Kubernetes manifests'],
+            ['todo', 'Blog post: architecture decisions deep-dive'],
+          ].map(([status, item]) => (
+            <div class="flex items-center gap-3 text-sm">
+              <span style={`color:${status === 'done' ? '#10B981' : status === 'progress' ? '#D4A017' : '#7A8BA8'}`}>
+                {status === 'done' ? '✓' : status === 'progress' ? '◐' : '○'}
+              </span>
+              <span style={`color:${status === 'todo' ? '#7A8BA8' : '#E8EDF5'}`}>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>

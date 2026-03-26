@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Enterprise Knowledge as AI Guardrails — Isra Sunhachawi">
+  <article class="max-w-4xl mx-auto px-6 py-20">
+
+    <div class="mb-4 animate-fade-in-up">
+      <a href="/projects" class="font-mono text-sm transition-colors" style="color:#7A8BA8;" onmouseover="this.style.color='#10B981'" onmouseout="this.style.color='#7A8BA8'">← projects/</a>
+    </div>
+
+    <div class="mb-10 animate-fade-in-up">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(0,145,110,0.1); color:#10B981;">Project 02</span>
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(224,92,92,0.1); color:#F08080;">In Progress</span>
+      </div>
+      <h1 class="text-4xl font-bold mb-4" style="color:#E8EDF5;">Enterprise Knowledge as AI Guardrails</h1>
+      <div class="h-1 w-16 rounded mb-6" style="background: linear-gradient(135deg, #00916E, #10B981);"></div>
+      <div class="flex flex-wrap gap-2">
+        {['Claude Code', 'LangGraph', 'n8n', 'CrewAI', 'GitHub Copilot', 'Python', 'Workflows', 'Rules', 'Skills'].map(tag => (
+          <span class="skill-tag skill-tag-emerald">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="space-y-10">
+
+      <!-- Problem -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-100">
+        <h2 class="font-mono text-sm mb-3" style="color:#10B981;">THE PROBLEM</h2>
+        <p style="color:#7A8BA8; line-height:1.9;">
+          Every engineering team has unwritten rules — how PRs should be reviewed, how stories get sized, what "done" really means. This knowledge lives in people's heads. When those people leave, the knowledge leaves with them. This project asks: what if we could codify that tribal knowledge as AI-enforced guardrails?
+        </p>
+      </div>
+
+      <!-- Two use cases -->
+      <div class="animate-fade-in-up animate-delay-200">
+        <h2 class="text-xl font-bold mb-6" style="color:#E8EDF5;">Two Use Cases</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="glass-card p-6" style="border-color:rgba(212,160,23,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#D4A017;">USE CASE 1 — SOFTWARE ENGINEERING</div>
+            <h3 class="font-bold mb-2" style="color:#E8EDF5;">PR Review Guardrails</h3>
+            <p class="text-sm mb-4" style="color:#7A8BA8;">
+              Encode your team's PR standards — security checks, test coverage expectations, architectural guardrails — as AI-enforced rules that run on every pull request.
+            </p>
+            <div class="space-y-1 text-xs font-mono" style="color:#7A8BA8;">
+              <div><span style="color:#D4A017;">Platform 1:</span> Claude Code rules + hooks</div>
+              <div><span style="color:#D4A017;">Platform 2:</span> GitHub Copilot custom instructions</div>
+              <div><span style="color:#D4A017;">Platform 3:</span> LangGraph review agent</div>
+            </div>
+          </div>
+
+          <div class="glass-card p-6" style="border-color:rgba(0,145,110,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#10B981;">USE CASE 2 — NON-SOFTWARE</div>
+            <h3 class="font-bold mb-2" style="color:#E8EDF5;">Sprint Planning Guardrails</h3>
+            <p class="text-sm mb-4" style="color:#7A8BA8;">
+              Encode capacity planning norms, definition of ready, estimation heuristics, and sprint health checks as AI workflows — making planning consistently rigorous.
+            </p>
+            <div class="space-y-1 text-xs font-mono" style="color:#7A8BA8;">
+              <div><span style="color:#10B981;">Platform 1:</span> Claude Code skills</div>
+              <div><span style="color:#10B981;">Platform 2:</span> n8n automated workflow</div>
+              <div><span style="color:#10B981;">Platform 3:</span> CrewAI multi-agent planning</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key insight -->
+      <div class="animate-fade-in-up animate-delay-300">
+        <h2 class="text-xl font-bold mb-4" style="color:#E8EDF5;">Key Decisions</h2>
+        <div class="space-y-4">
+          {[
+            {
+              q: 'Why multiple platforms instead of one?',
+              a: 'The central thesis is that the knowledge — not the platform — is the durable asset. Showing the same guardrails expressed in Claude Code rules, n8n workflows, and a LangGraph agent proves the concept is portable. It also demonstrates practical breadth across the AI tooling ecosystem.',
+            },
+            {
+              q: 'Why sprint planning as the non-software use case?',
+              a: 'Sprint planning is universal, immediately relatable to engineering leaders, and notoriously inconsistent across teams. It shows AI guardrails can govern human processes, not just code — which is the broader enterprise value proposition.',
+            },
+            {
+              q: 'Config-as-code vs. agent workflows — when to use which?',
+              a: 'Config-as-code (Claude Code rules, Copilot instructions) is better for synchronous, lightweight guardrails embedded in the developer\'s existing tool. Agent workflows (LangGraph, n8n) are better for async, multi-step processes that aggregate context from multiple sources before making a judgment.',
+            },
+          ].map(({ q, a }) => (
+            <div class="glass-card p-5">
+              <div class="font-semibold mb-2" style="color:#E8EDF5;">{q}</div>
+              <p class="text-sm" style="color:#7A8BA8;">{a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-400" style="border-color:rgba(0,145,110,0.3);">
+        <h2 class="font-mono text-sm mb-3" style="color:#10B981;">STATUS</h2>
+        <div class="space-y-2">
+          {[
+            ['done', 'PR review rules defined in Claude Code (.claude/CLAUDE.md + rules)'],
+            ['done', 'GitHub Copilot custom instructions baseline created'],
+            ['progress', 'LangGraph PR review agent (structured output, tool use)'],
+            ['progress', 'Sprint planning skill for Claude Code'],
+            ['todo', 'n8n sprint planning workflow'],
+            ['todo', 'CrewAI multi-agent sprint planning crew'],
+            ['todo', 'Comparative blog post: same guardrail, 5 platforms'],
+          ].map(([status, item]) => (
+            <div class="flex items-center gap-3 text-sm">
+              <span style={`color:${status === 'done' ? '#10B981' : status === 'progress' ? '#D4A017' : '#7A8BA8'}`}>
+                {status === 'done' ? '✓' : status === 'progress' ? '◐' : '○'}
+              </span>
+              <span style={`color:${status === 'todo' ? '#7A8BA8' : '#E8EDF5'}`}>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>

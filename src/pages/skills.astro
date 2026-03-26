@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skillGroups = [
+  {
+    domain: 'DevSecOps & Platform',
+    color: 'gold',
+    icon: '🔐',
+    skills: ['GitHub Actions', 'GitLab CI', 'SAST/DAST', 'Trivy', 'Semgrep', 'Checkov', 'Snyk', 'Dependency-Track', 'tfsec', 'OPA/Gatekeeper', 'Falco', 'Vault', 'SOPS', 'SBOM', 'Cosign'],
+  },
+  {
+    domain: 'AI & ML Engineering',
+    color: 'emerald',
+    icon: '🤖',
+    skills: ['Ollama', 'LangChain', 'LangGraph', 'LlamaIndex', 'CrewAI', 'n8n', 'RAG', 'Fine-tuning', 'Prompt Engineering', 'AI Red-Teaming', 'OWASP LLM Top 10', 'MITRE ATLAS', 'Model Evaluation'],
+  },
+  {
+    domain: 'Cloud & Infrastructure',
+    color: 'coral',
+    icon: '☁️',
+    skills: ['AWS', 'Azure', 'Terraform', 'Kubernetes', 'k0s', 'Docker', 'Helm', 'ArgoCD', 'Harbor', 'Zot', 'Network Policies', 'Zero-Trust'],
+  },
+  {
+    domain: 'Compliance & Governance',
+    color: 'gold',
+    icon: '📋',
+    skills: ['NIST CSF', 'NIST 800-53', 'NIST AI RMF', 'CIS Benchmarks', 'SOC 2', 'FedRAMP', 'Compliance-as-Code', 'Threat Modeling', 'STRIDE', 'Policy-as-Code'],
+  },
+  {
+    domain: 'Languages & Tooling',
+    color: 'emerald',
+    icon: '💻',
+    skills: ['Python', 'Bash', 'Go', 'Terraform HCL', 'YAML', 'Rego (OPA)', 'SQL', 'FastAPI', 'Git', 'Linux'],
+  },
+];
+---
+
+<BaseLayout title="Skills — Isra Sunhachawi">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="mb-12 animate-fade-in-up">
+      <span class="font-mono text-sm" style="color:#D4A017;">$ ls skills/</span>
+      <h1 class="text-4xl font-bold mt-3 mb-2" style="color:#E8EDF5;">Skills</h1>
+      <div class="h-1 w-16 rounded" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+      <p class="mt-4 text-sm" style="color:#7A8BA8;">Organized by domain. Every skill links to a project or certification.</p>
+    </div>
+
+    <div class="space-y-8">
+      {skillGroups.map((group, i) => (
+        <div class="glass-card p-6 animate-fade-in-up" style={`animation-delay: ${i * 0.1}s; opacity: 0;`}>
+          <div class="flex items-center gap-3 mb-5">
+            <span class="text-xl">{group.icon}</span>
+            <h2 class="font-bold text-lg" style="color:#E8EDF5;">{group.domain}</h2>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {group.skills.map(skill => (
+              <span class={`skill-tag${group.color === 'emerald' ? ' skill-tag-emerald' : group.color === 'coral' ? ' skill-tag-coral' : ''}`}>
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </section>
+</BaseLayout>

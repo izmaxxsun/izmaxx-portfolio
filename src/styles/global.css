@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  /* Thailand-inspired palette */
+  --color-thai-gold: #D4A017;
+  --color-thai-gold-light: #F0C040;
+  --color-thai-emerald: #00916E;
+  --color-thai-emerald-light: #10B981;
+  --color-thai-coral: #E05C5C;
+  --color-thai-navy: #0B1120;
+  --color-thai-navy-mid: #131C31;
+  --color-thai-navy-card: #1A2540;
+  --color-thai-border: #1E2D4A;
+  --color-thai-text: #E8EDF5;
+  --color-thai-muted: #7A8BA8;
+
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-thai-navy);
+  color: var(--color-thai-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(26, 37, 64, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-thai-border);
+  border-radius: 12px;
+}
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(135deg, var(--color-thai-gold), var(--color-thai-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Emerald gradient text */
+.emerald-text {
+  background: linear-gradient(135deg, var(--color-thai-emerald), var(--color-thai-emerald-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle background grid */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(212, 160, 23, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 160, 23, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 160, 23, 0.15);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(0, 145, 110, 0.15);
+}
+
+/* Skill tag */
+.skill-tag {
+  background: rgba(212, 160, 23, 0.08);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  color: var(--color-thai-gold-light);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  transition: all 0.2s;
+}
+
+.skill-tag:hover {
+  background: rgba(212, 160, 23, 0.15);
+  border-color: rgba(212, 160, 23, 0.4);
+}
+
+.skill-tag-emerald {
+  background: rgba(0, 145, 110, 0.08);
+  border: 1px solid rgba(0, 145, 110, 0.2);
+  color: var(--color-thai-emerald-light);
+}
+
+.skill-tag-emerald:hover {
+  background: rgba(0, 145, 110, 0.15);
+  border-color: rgba(0, 145, 110, 0.4);
+}
+
+.skill-tag-coral {
+  background: rgba(224, 92, 92, 0.08);
+  border: 1px solid rgba(224, 92, 92, 0.2);
+  color: #F08080;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-thai-navy); }
+::-webkit-scrollbar-thumb { background: var(--color-thai-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-thai-gold); }

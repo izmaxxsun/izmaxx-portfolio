@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    id: 'air-gapped-llm',
+    number: '01',
+    color: 'gold',
+    title: 'Air-Gapped Incident Triage LLM',
+    problem: 'Security teams need AI-assisted alert triage, but enterprise data cannot leave the perimeter.',
+    outcome: 'Private LLM running on k0s Kubernetes with zero egress network policies. Fine-tuned model classifies incoming security alerts by severity and recommends response actions — fully offline.',
+    tags: ['Ollama', 'k0s', 'Kubernetes', 'Fine-tuning', 'Harbor', 'DevSecOps', 'Air-Gap'],
+    status: 'In Progress',
+  },
+  {
+    id: 'enterprise-knowledge-guardrails',
+    number: '02',
+    color: 'emerald',
+    title: 'Enterprise Knowledge as AI Guardrails',
+    problem: 'Critical team standards live only in people\'s heads — PR review norms, sprint planning rules, and estimation heuristics disappear when engineers leave.',
+    outcome: 'Tribal knowledge codified as AI-enforced guardrails across Claude Code, LangGraph, n8n, and CrewAI. Two use cases: automated PR review standards and AI-assisted sprint planning — showing the concept is platform-portable.',
+    tags: ['Claude Code', 'LangGraph', 'n8n', 'CrewAI', 'GitHub Copilot', 'Workflows', 'Enterprise AI'],
+    status: 'In Progress',
+  },
+];
+---
+
+<BaseLayout title="Projects — Isra Sunhachawi">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="mb-12 animate-fade-in-up">
+      <span class="font-mono text-sm" style="color:#D4A017;">$ ls projects/</span>
+      <h1 class="text-4xl font-bold mt-3 mb-2" style="color:#E8EDF5;">Projects</h1>
+      <div class="h-1 w-16 rounded" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+      <p class="mt-4 text-sm" style="color:#7A8BA8;">Case studies — not a repo dump. Each includes the problem, my decisions, and the outcome.</p>
+    </div>
+
+    <div class="space-y-8">
+      {projects.map((p, i) => (
+        <a
+          href={`/projects/${p.id}`}
+          class="glass-card p-8 block group transition-all duration-300 animate-fade-in-up"
+          style={`animation-delay: ${i * 0.15}s; opacity: 0; text-decoration: none;`}
+          onmouseover={`this.style.borderColor='rgba(${p.color === 'gold' ? '212,160,23' : '0,145,110'},0.4)'`}
+          onmouseout="this.style.borderColor='#1E2D4A'"
+        >
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs px-2 py-1 rounded" style={`background:rgba(${p.color === 'gold' ? '212,160,23' : '0,145,110'},0.1); color:${p.color === 'gold' ? '#D4A017' : '#10B981'};`}>
+                Project {p.number}
+              </span>
+              <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(224,92,92,0.1); color:#F08080;">
+                {p.status}
+              </span>
+            </div>
+            <svg width="16" height="16" fill="none" stroke="#7A8BA8" stroke-width="2" viewBox="0 0 24 24" class="transition-all group-hover:stroke-[#D4A017] group-hover:translate-x-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+
+          <h2 class="text-2xl font-bold mb-3 transition-colors" style={`color:#E8EDF5;`}>
+            {p.title}
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-5">
+            <div>
+              <div class="font-mono text-xs mb-1" style="color:#7A8BA8;">PROBLEM</div>
+              <p class="text-sm" style="color:#7A8BA8;">{p.problem}</p>
+            </div>
+            <div>
+              <div class="font-mono text-xs mb-1" style="color:#7A8BA8;">OUTCOME</div>
+              <p class="text-sm" style="color:#7A8BA8;">{p.outcome}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {p.tags.map(tag => (
+              <span class={`skill-tag${p.color === 'emerald' ? ' skill-tag-emerald' : ''}`}>{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </section>
+</BaseLayout>

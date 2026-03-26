@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About — Isra Sunhachawi" description="DevSecOps engineer and AI practitioner with a focus on secure infrastructure and applied AI.">
+  <section class="max-w-4xl mx-auto px-6 py-20">
+
+    <div class="mb-12 animate-fade-in-up">
+      <span class="font-mono text-sm" style="color:#D4A017;">$ cat about.md</span>
+      <h1 class="text-4xl font-bold mt-3 mb-2" style="color:#E8EDF5;">About Me</h1>
+      <div class="h-1 w-16 rounded" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-12">
+
+      <div class="md:col-span-2 space-y-6 animate-fade-in-up animate-delay-100">
+        <p style="color:#7A8BA8; line-height:1.9;">
+          I'm a <span style="color:#E8EDF5;">DevSecOps engineer and AI practitioner</span> who operates at the intersection of platform security and applied AI. My work focuses on building systems where security is automated, auditable, and embedded by design — not bolted on at the end.
+        </p>
+        <p style="color:#7A8BA8; line-height:1.9;">
+          Over my career I've designed and operated CI/CD pipelines with integrated security gates, deployed compliance-as-code frameworks against real regulatory standards, and built LLM-powered tools that solve practical engineering problems. I care deeply about <span style="color:#D4A017;">data sovereignty</span> — which is why I'm increasingly focused on private, air-gapped AI infrastructure.
+        </p>
+        <p style="color:#7A8BA8; line-height:1.9;">
+          I'm now growing into roles at the intersection of <span style="color:#10B981;">AI security</span>, platform engineering leadership, and applied AI — specifically in environments where security and compliance are non-negotiable. I believe the engineers who understand both the attack surface of AI systems and how to build with them have a rare and valuable perspective.
+        </p>
+
+        <div class="glass-card p-6 mt-8">
+          <h2 class="font-bold mb-4" style="color:#E8EDF5;">My Philosophy</h2>
+          <ul class="space-y-3">
+            {[
+              ['Security is code.', 'Policies, guardrails, and controls belong in version control — not wikis.'],
+              ['Private AI is not optional in enterprise.', 'Data sovereignty matters. Every LLM call to a third party is a trust decision.'],
+              ['Codify what people know.', 'The most dangerous knowledge in any org lives only in someone\'s head.'],
+              ['The "why" outlasts the "what".', 'Document your decisions. Future you — and your team — will thank you.'],
+            ].map(([title, body]) => (
+              <li class="flex gap-3">
+                <span style="color:#D4A017; flex-shrink:0; margin-top:2px;">▸</span>
+                <span style="color:#7A8BA8;"><span style="color:#E8EDF5;">{title}</span> {body}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-6 animate-fade-in-up animate-delay-200">
+        <div class="glass-card p-5">
+          <h3 class="font-mono text-xs mb-4" style="color:#D4A017;">CURRENTLY</h3>
+          <ul class="space-y-2 text-sm" style="color:#7A8BA8;">
+            <li>Building air-gapped LLM infrastructure</li>
+            <li>Exploring MITRE ATLAS for LLM threat modeling</li>
+            <li>Writing about AI guardrails in enterprise</li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-5">
+          <h3 class="font-mono text-xs mb-4" style="color:#10B981;">FOCUS AREAS</h3>
+          <ul class="space-y-2 text-sm" style="color:#7A8BA8;">
+            <li>AI Security (OWASP LLM Top 10)</li>
+            <li>Private LLM Infrastructure</li>
+            <li>Compliance-as-Code</li>
+            <li>DevSecOps Platform Engineering</li>
+            <li>Enterprise AI Guardrails</li>
+          </ul>
+        </div>
+
+        <a
+          href="/resume.pdf"
+          class="flex items-center justify-center gap-2 w-full py-3 rounded-lg text-sm font-semibold transition-all"
+          style="background:rgba(212,160,23,0.1); border:1px solid rgba(212,160,23,0.3); color:#D4A017;"
+          onmouseover="this.style.background='rgba(212,160,23,0.2)'"
+          onmouseout="this.style.background='rgba(212,160,23,0.1)'"
+        >
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Download Resume
+        </a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

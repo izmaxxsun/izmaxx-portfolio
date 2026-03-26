@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Isra Sunhachawi — DevSecOps & AI Practitioner',
+  description = 'Portfolio of Isra Sunhachawi, DevSecOps engineer and AI practitioner specializing in secure infrastructure, private AI, and codified enterprise knowledge.',
+} = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/skills', label: 'Skills' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/certifications', label: 'Certs' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body class="bg-grid">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(11,17,32,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid #1E2D4A;">
+      <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+        <a href="/" class="font-mono text-sm font-medium" style="color: #D4A017;">
+          <span style="color: #7A8BA8;">~/</span>izmaxx
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          {navLinks.map(link => (
+            <a
+              href={link.href}
+              class="text-sm font-medium transition-colors duration-200"
+              style={currentPath === link.href
+                ? 'color: #D4A017;'
+                : 'color: #7A8BA8;'}
+              onmouseover="this.style.color='#E8EDF5'"
+              onmouseout={`this.style.color='${currentPath === link.href ? '#D4A017' : '#7A8BA8'}'`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2" style="color: #7A8BA8;" aria-label="Toggle menu">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class="block py-2 text-sm font-medium"
+            style={currentPath === link.href ? 'color: #D4A017;' : 'color: #7A8BA8;'}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+
+    <main class="pt-16">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid #1E2D4A;" class="mt-24 py-10">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <span class="font-mono text-sm" style="color: #7A8BA8;">
+          &copy; {new Date().getFullYear()} Isra Sunhachawi
+        </span>
+        <div class="flex items-center gap-6">
+          <a href="https://github.com/izmaxxsun" target="_blank" rel="noopener" class="text-sm transition-colors" style="color: #7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">GitHub</a>
+          <a href="https://linkedin.com/in/izmaxxsun" target="_blank" rel="noopener" class="text-sm transition-colors" style="color: #7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>
