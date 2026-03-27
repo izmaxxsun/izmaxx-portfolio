@@ -6,7 +6,7 @@ const certGroups = [
     domain: 'Kubernetes & DevOps',
     color: 'gold',
     certs: [
-      { name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '' },
+      { name: 'Certified Kubernetes Administrator (CKA)', issuer: 'CNCF', date: '', link: 'https://www.credly.com/badges/046af1c9-cb44-4bfa-aa84-0857afb83ffd/linked_in_profile', logo: 'https://images.credly.com/size/340x340/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png' },
       { name: 'Certified Kubernetes Application Developer (CKAD)', issuer: 'CNCF', date: '' },
       { name: 'Certified Scrum Product Owner (CSPO)', issuer: 'Scrum Alliance', date: '' },
     ],
@@ -49,19 +49,36 @@ const certGroups = [
             {group.domain}
           </h2>
           <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {group.certs.map(cert => (
-              <div class="glass-card p-5 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={`background:rgba(${group.color === 'gold' ? '212,160,23' : group.color === 'emerald' ? '0,145,110' : '224,92,92'},0.1);`}>
-                  <svg width="20" height="20" fill="none" stroke={group.color === 'gold' ? '#D4A017' : group.color === 'emerald' ? '#10B981' : '#F08080'} stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                  </svg>
+            {group.certs.map(cert => {
+              const accentRgb = group.color === 'gold' ? '212,160,23' : group.color === 'emerald' ? '0,145,110' : '224,92,92';
+              const accentHex = group.color === 'gold' ? '#D4A017' : group.color === 'emerald' ? '#10B981' : '#F08080';
+              const cardContent = (
+                <>
+                  <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden" style={`background:rgba(${accentRgb},0.1);`}>
+                    {cert.logo ? (
+                      <img src={cert.logo} alt={cert.name} width="48" height="48" class="w-full h-full object-contain p-1" />
+                    ) : (
+                      <svg width="20" height="20" fill="none" stroke={accentHex} stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <div class="font-medium text-sm" style="color:#E8EDF5;">{cert.name}</div>
+                    {cert.issuer && <div class="text-xs mt-1" style="color:#7A8BA8;">{cert.issuer} · {cert.date}</div>}
+                  </div>
+                </>
+              );
+              return cert.link ? (
+                <a href={cert.link} target="_blank" rel="noopener noreferrer" class="glass-card p-5 flex items-center gap-4 hover:opacity-80 transition-opacity">
+                  {cardContent}
+                </a>
+              ) : (
+                <div class="glass-card p-5 flex items-center gap-4">
+                  {cardContent}
                 </div>
-                <div>
-                  <div class="font-medium text-sm" style="color:#E8EDF5;">{cert.name}</div>
-                  {cert.issuer && <div class="text-xs mt-1" style="color:#7A8BA8;">{cert.issuer} · {cert.date}</div>}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}
