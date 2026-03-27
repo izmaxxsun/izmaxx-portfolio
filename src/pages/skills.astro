@@ -12,7 +12,7 @@ const skillGroups = [
     domain: 'AI & ML Engineering',
     color: 'emerald',
     icon: '🤖',
-    skills: ['Ollama', 'LangChain', 'LangGraph', 'CrewAI', 'n8n', 'Streamlit', 'RAG', 'MCP Servers', 'Agentic Workflows', 'AI-Assisted SW Development'],
+    skills: ['Ollama', 'LangChain', 'LangGraph', 'CrewAI', 'n8n', 'Streamlit', 'RAG', { name: 'MCP Servers', detail: 'Developed MCP server with FastMCP to simplify deployable software factory installation' }, 'Agentic Workflows', 'AI-Assisted SW Development'],
   },
   {
     domain: 'Compliance & Governance',
@@ -42,7 +42,7 @@ const skillGroups = [
       <span class="font-mono text-sm" style="color:#D4A017;">$ ls skills/</span>
       <h1 class="text-4xl font-bold mt-3 mb-2" style="color:#E8EDF5;">Skills</h1>
       <div class="h-1 w-16 rounded" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
-      <p class="mt-4 text-sm" style="color:#7A8BA8;">Organized by domain. Every skill links to a project or certification.</p>
+      <p class="mt-4 text-sm" style="color:#7A8BA8;">Organized by domain. Click highlighted skills to learn more.</p>
     </div>
 
     <div class="space-y-8">
@@ -53,15 +53,72 @@ const skillGroups = [
             <h2 class="font-bold text-lg" style="color:#E8EDF5;">{group.domain}</h2>
           </div>
           <div class="flex flex-wrap gap-2">
-            {group.skills.map(skill => (
-              <span class={`skill-tag${group.color === 'emerald' ? ' skill-tag-emerald' : group.color === 'coral' ? ' skill-tag-coral' : ''}`}>
-                {skill}
-              </span>
-            ))}
+            {group.skills.map(skill => {
+              const name = typeof skill === 'string' ? skill : skill.name;
+              const detail = typeof skill === 'string' ? null : skill.detail;
+              const colorClass = group.color === 'emerald' ? ' skill-tag-emerald' : group.color === 'coral' ? ' skill-tag-coral' : '';
+              return detail ? (
+                <button
+                  class={`skill-tag${colorClass} skill-tag-interactive`}
+                  data-skill={name}
+                  data-detail={detail}
+                  style="cursor:pointer;"
+                >
+                  {name}
+                  <span style="margin-left:4px; opacity:0.7; font-size:0.65em; vertical-align:middle;">▸</span>
+                </button>
+              ) : (
+                <span class={`skill-tag${colorClass}`}>{name}</span>
+              );
+            })}
           </div>
         </div>
       ))}
     </div>
 
   </section>
+
+  <!-- Modal -->
+  <div id="skill-modal" class="fixed inset-0 z-50 hidden items-center justify-center px-4" style="background:rgba(11,17,32,0.8); backdrop-filter:blur(8px);">
+    <div class="glass-card p-8 max-w-md w-full relative" style="border-color:rgba(0,145,110,0.4);">
+      <button id="skill-modal-close" class="absolute top-4 right-4 text-sm" style="color:#7A8BA8;" aria-label="Close">✕</button>
+      <div class="font-mono text-xs mb-3" style="color:#10B981;">skill.detail</div>
+      <h3 id="skill-modal-title" class="text-xl font-bold mb-4" style="color:#E8EDF5;"></h3>
+      <p id="skill-modal-body" class="text-sm leading-relaxed" style="color:#7A8BA8;"></p>
+    </div>
+  </div>
+
 </BaseLayout>
+
+<script is:inline>
+  const modal = document.getElementById('skill-modal');
+  const modalTitle = document.getElementById('skill-modal-title');
+  const modalBody = document.getElementById('skill-modal-body');
+  const closeBtn = document.getElementById('skill-modal-close');
+
+  function openModal(name, detail) {
+    modalTitle.textContent = name;
+    modalBody.textContent = detail;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  document.querySelectorAll('[data-detail]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.skill, btn.dataset.detail));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
