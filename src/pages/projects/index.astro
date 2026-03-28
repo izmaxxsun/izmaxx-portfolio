@@ -3,18 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const projects = [
   {
-    id: 'air-gapped-llm',
-    number: '01',
-    color: 'gold',
-    title: 'Air-Gapped Incident Triage LLM',
-    problem: 'Security teams need AI-assisted alert triage, but enterprise data cannot leave the perimeter.',
-    outcome: 'Private LLM running on k0s Kubernetes with zero egress network policies. Fine-tuned model classifies incoming security alerts by severity and recommends response actions — fully offline.',
-    tags: ['Ollama', 'k0s', 'Kubernetes', 'Fine-tuning', 'Harbor', 'DevSecOps', 'Air-Gap'],
-    status: 'In Progress',
-  },
-  {
     id: 'enterprise-knowledge-guardrails',
-    number: '02',
+    number: '01',
     color: 'emerald',
     title: 'Enterprise Knowledge as AI Guardrails',
     problem: 'Critical team standards live only in people\'s heads — PR review norms, sprint planning rules, and estimation heuristics disappear when engineers leave.',
