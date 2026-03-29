@@ -12,13 +12,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <div class="mb-10 animate-fade-in-up">
       <div class="flex items-center gap-3 mb-4">
-        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(0,145,110,0.1); color:#10B981;">Project 02</span>
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(0,145,110,0.1); color:#10B981;">Project 01</span>
         <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(224,92,92,0.1); color:#F08080;">In Progress</span>
       </div>
       <h1 class="text-4xl font-bold mb-4" style="color:#E8EDF5;">Enterprise Knowledge as AI Guardrails</h1>
       <div class="h-1 w-16 rounded mb-6" style="background: linear-gradient(135deg, #00916E, #10B981);"></div>
       <div class="flex flex-wrap gap-2">
-        {['Claude Code', 'LangGraph', 'n8n', 'CrewAI', 'GitHub Copilot', 'Python', 'Workflows', 'Rules', 'Skills'].map(tag => (
+        {['Claude Code', 'LangGraph', 'n8n', 'CrewAI', 'GitHub Copilot', 'Python', 'Workflows', 'Rules', 'Skills', 'ADR'].map(tag => (
           <span class="skill-tag skill-tag-emerald">{tag}</span>
         ))}
       </div>
@@ -30,17 +30,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="glass-card p-6 animate-fade-in-up animate-delay-100">
         <h2 class="font-mono text-sm mb-3" style="color:#10B981;">THE PROBLEM</h2>
         <p style="color:#7A8BA8; line-height:1.9;">
-          Every engineering team has unwritten rules — how PRs should be reviewed, how stories get sized, what "done" really means. This knowledge lives in people's heads. When those people leave, the knowledge leaves with them. This project asks: what if we could codify that tribal knowledge as AI-enforced guardrails?
+          Every engineering team has unwritten rules — how PRs should be reviewed, how stories get sized, what "done" really means. And written ones that nobody reads: architectural decisions carefully documented in ADRs, violated by the next engineer who never found them. This project asks: what if we could codify that tribal knowledge — spoken and documented alike — as AI-enforced guardrails?
         </p>
       </div>
 
-      <!-- Two use cases -->
+      <!-- Three use cases -->
       <div class="animate-fade-in-up animate-delay-200">
-        <h2 class="text-xl font-bold mb-6" style="color:#E8EDF5;">Two Use Cases</h2>
+        <h2 class="text-xl font-bold mb-2" style="color:#E8EDF5;">Use Cases: Micro → Meso → Macro</h2>
+        <p class="text-sm mb-6" style="color:#7A8BA8;">Arranged by scope — from enforcing a single PR, to planning a sprint, to upholding multi-year architectural commitments.</p>
 
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-3 gap-6">
           <div class="glass-card p-6" style="border-color:rgba(212,160,23,0.2);">
-            <div class="font-mono text-xs mb-3" style="color:#D4A017;">USE CASE 1 — SOFTWARE ENGINEERING</div>
+            <div class="font-mono text-xs mb-3" style="color:#D4A017;">USE CASE 1 — MICRO</div>
             <h3 class="font-bold mb-2" style="color:#E8EDF5;">PR Review Guardrails</h3>
             <p class="text-sm mb-4" style="color:#7A8BA8;">
               Encode your team's PR standards — security checks, test coverage expectations, architectural guardrails — as AI-enforced rules that run on every pull request.
@@ -53,7 +54,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           </div>
 
           <div class="glass-card p-6" style="border-color:rgba(0,145,110,0.2);">
-            <div class="font-mono text-xs mb-3" style="color:#10B981;">USE CASE 2 — NON-SOFTWARE</div>
+            <div class="font-mono text-xs mb-3" style="color:#10B981;">USE CASE 2 — MESO</div>
             <h3 class="font-bold mb-2" style="color:#E8EDF5;">Sprint Planning Guardrails</h3>
             <p class="text-sm mb-4" style="color:#7A8BA8;">
               Encode capacity planning norms, definition of ready, estimation heuristics, and sprint health checks as AI workflows — making planning consistently rigorous.
@@ -64,10 +65,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               <div><span style="color:#10B981;">Platform 3:</span> CrewAI multi-agent planning</div>
             </div>
           </div>
+
+          <div class="glass-card p-6" style="border-color:rgba(240,128,128,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#F08080;">USE CASE 3 — MACRO</div>
+            <h3 class="font-bold mb-2" style="color:#E8EDF5;">Architecture Decision Enforcement</h3>
+            <p class="text-sm mb-4" style="color:#7A8BA8;">
+              Encode ADRs as AI-enforced constraints that catch violations at three points: before code is written, at PR review, and during design proposals.
+            </p>
+            <div class="space-y-1 text-xs font-mono" style="color:#7A8BA8;">
+              <div><span style="color:#F08080;">Platform 1:</span> Claude Code rules (generation-time, passive)</div>
+              <div><span style="color:#F08080;">Platform 2:</span> LangGraph ADR agent (PR-time, automated)</div>
+              <div><span style="color:#F08080;">Platform 3:</span> Claude Code skill (design-time, on-demand)</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Key insight -->
+      <!-- Key decisions -->
       <div class="animate-fade-in-up animate-delay-300">
         <h2 class="text-xl font-bold mb-4" style="color:#E8EDF5;">Key Decisions</h2>
         <div class="space-y-4">
@@ -83,6 +97,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             {
               q: 'Config-as-code vs. agent workflows — when to use which?',
               a: 'Config-as-code (Claude Code rules, Copilot instructions) is better for synchronous, lightweight guardrails embedded in the developer\'s existing tool. Agent workflows (LangGraph, n8n) are better for async, multi-step processes that aggregate context from multiple sources before making a judgment.',
+            },
+            {
+              q: 'Why enforce ADRs with AI when the real fix is a better engineering culture?',
+              a: 'Culture-based solutions require continuous human attention and degrade as teams scale and turn over. AI enforcement doesn\'t replace culture — it institutionalizes the outcomes of past cultural decisions. An ADR represents a hard-won consensus. The guardrail preserves that consensus across personnel changes without requiring every new hire to re-litigate it.',
+            },
+            {
+              q: 'How does the system stay current as ADRs are superseded or deprecated?',
+              a: 'ADRs have a lifecycle: proposed, accepted, deprecated, superseded. The Claude Code rules file is updated when an ADR changes. The LangGraph agent draws from the ADR corpus at retrieval time, excluding deprecated entries. This creates a healthy incentive to keep ADRs well-maintained — the system only enforces what\'s current.',
             },
           ].map(({ q, a }) => (
             <div class="glass-card p-5">
@@ -104,6 +126,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             ['progress', 'Sprint planning skill for Claude Code'],
             ['todo', 'n8n sprint planning workflow'],
             ['todo', 'CrewAI multi-agent sprint planning crew'],
+            ['todo', 'ADR library structured as retrieval corpus (JSON/Markdown with status metadata)'],
+            ['todo', 'Claude Code rules: generation-time ADR constraints'],
+            ['todo', 'LangGraph ADR agent: diff analysis mapped to ADR identifiers'],
+            ['todo', 'Claude Code skill: design proposal review against ADR library'],
+            ['todo', 'Integration test: one ADR violation caught at all three enforcement points'],
             ['todo', 'Comparative blog post: same guardrail, 5 platforms'],
           ].map(([status, item]) => (
             <div class="flex items-center gap-3 text-sm">

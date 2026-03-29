@@ -79,6 +79,10 @@ body {
   box-shadow: 0 0 20px rgba(0, 145, 110, 0.15);
 }
 
+.glow-coral {
+  box-shadow: 0 0 20px rgba(240, 128, 128, 0.15);
+}
+
 /* Skill tag */
 .skill-tag {
   background: rgba(212, 160, 23, 0.08);
