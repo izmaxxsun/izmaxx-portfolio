@@ -76,18 +76,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <div class="grid md:grid-cols-2 gap-6">
 
-      <div class="glass-card p-6 transition-all duration-300 glow-emerald group" style="cursor:pointer;" onclick={`window.location='${base}/projects/enterprise-knowledge-guardrails'`}>
+      <div class="glass-card p-6 transition-all duration-300 glow-gold group" style="cursor:pointer;" onclick={`window.location='${base}/projects/gitlab-analyzer'`}>
         <div class="flex items-start justify-between mb-3">
-          <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(0,145,110,0.1); color:#10B981;">Project 01</span>
-          <svg width="16" height="16" fill="none" stroke="#7A8BA8" stroke-width="2" viewBox="0 0 24 24" class="transition-colors group-hover:stroke-[#10B981]"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(212,160,23,0.1); color:#D4A017;">Project 02</span>
+          <svg width="16" height="16" fill="none" stroke="#7A8BA8" stroke-width="2" viewBox="0 0 24 24" class="transition-colors group-hover:stroke-[#D4A017]"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </div>
-        <h3 class="text-lg font-bold mb-2" style="color:#E8EDF5;">Enterprise Knowledge as AI Guardrails</h3>
-        <p class="text-sm mb-4" style="color:#7A8BA8;">Tribal knowledge codified as AI-enforced rules across multiple platforms — PR review standards and sprint planning guardrails.</p>
+        <h3 class="text-lg font-bold mb-2" style="color:#E8EDF5;">GitLab Project Analyzer</h3>
+        <p class="text-sm mb-4" style="color:#7A8BA8;">Go CLI that inventories GitLab projects org-wide — detecting languages, tools, and CI/CD pipeline health to surface inconsistencies before they become incidents.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-tag-emerald skill-tag">Claude Code</span>
-          <span class="skill-tag-emerald skill-tag">LangGraph</span>
-          <span class="skill-tag-emerald skill-tag">n8n</span>
-          <span class="skill-tag">CrewAI</span>
+          <span class="skill-tag">Go</span>
+          <span class="skill-tag">GitLab API</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Pipeline Analytics</span>
         </div>
       </div>
 
