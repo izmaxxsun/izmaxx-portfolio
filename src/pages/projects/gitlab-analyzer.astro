@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="GitLab Project Analyzer — Isra Sunhachawi">
+  <article class="max-w-4xl mx-auto px-6 py-20">
+
+    <div class="mb-4 animate-fade-in-up">
+      <a href={`${base}/projects`} class="font-mono text-sm transition-colors" style="color:#7A8BA8;" onmouseover="this.style.color='#D4A017'" onmouseout="this.style.color='#7A8BA8'">← projects/</a>
+    </div>
+
+    <div class="mb-10 animate-fade-in-up">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(212,160,23,0.1); color:#D4A017;">Project 01</span>
+        <span class="font-mono text-xs px-2 py-1 rounded" style="background:rgba(224,92,92,0.1); color:#F08080;">In Progress</span>
+      </div>
+      <h1 class="text-4xl font-bold mb-4" style="color:#E8EDF5;">GitLab Project Analyzer</h1>
+      <div class="h-1 w-16 rounded mb-6" style="background: linear-gradient(135deg, #D4A017, #F0C040);"></div>
+      <div class="flex flex-wrap gap-2">
+        {['Go', 'GitLab API', 'CI/CD', 'DevSecOps', 'Pipeline Analytics', 'CLI', 'REST API'].map(tag => (
+          <span class="skill-tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div class="space-y-10">
+
+      <!-- Problem -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-100">
+        <h2 class="font-mono text-sm mb-3" style="color:#D4A017;">THE PROBLEM</h2>
+        <p style="color:#7A8BA8; line-height:1.9;">
+          Engineering teams managing dozens of GitLab projects rarely have a clear answer to: "What tools are we actually using?", "Are all projects following our pipeline standards?", or "Which projects have unhealthy CI/CD pipelines?" The result is tool sprawl, inconsistent practices across teams, and blind spots in org-wide health that only surface when something breaks in production.
+        </p>
+      </div>
+
+      <!-- What it does -->
+      <div class="animate-fade-in-up animate-delay-200">
+        <h2 class="text-xl font-bold mb-6" style="color:#E8EDF5;">What It Analyzes</h2>
+
+        <div class="grid md:grid-cols-3 gap-5">
+          <div class="glass-card p-5" style="border-color:rgba(212,160,23,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#D4A017;">LANGUAGES</div>
+            <h3 class="font-bold mb-2 text-sm" style="color:#E8EDF5;">Language Inventory</h3>
+            <p class="text-xs" style="color:#7A8BA8;">
+              Queries the GitLab Languages API per project — aggregates byte-weighted breakdowns org-wide to surface which languages dominate, and which are outliers.
+            </p>
+          </div>
+
+          <div class="glass-card p-5" style="border-color:rgba(212,160,23,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#D4A017;">TOOLS</div>
+            <h3 class="font-bold mb-2 text-sm" style="color:#E8EDF5;">Tool Detection</h3>
+            <p class="text-xs" style="color:#7A8BA8;">
+              Scans repository file trees for Dockerfiles, Makefiles, dependency manifests, and CI configuration patterns to infer which toolchain each project relies on.
+            </p>
+          </div>
+
+          <div class="glass-card p-5" style="border-color:rgba(212,160,23,0.2);">
+            <div class="font-mono text-xs mb-3" style="color:#D4A017;">PIPELINES</div>
+            <h3 class="font-bold mb-2 text-sm" style="color:#E8EDF5;">Pipeline Metrics</h3>
+            <p class="text-xs" style="color:#7A8BA8;">
+              Pulls recent pipeline history per project: success rate, average duration, failure frequency, and time-since-last-run — a CI/CD health score in one pass.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architecture -->
+      <div class="animate-fade-in-up animate-delay-200">
+        <h2 class="text-xl font-bold mb-6" style="color:#E8EDF5;">How It Works</h2>
+
+        <div class="glass-card p-6">
+          <div class="font-mono text-xs mb-4" style="color:#D4A017;">EXECUTION FLOW</div>
+          <div class="space-y-3">
+            {[
+              { step: '01', label: 'Enumerate projects', detail: 'Paginate the GitLab Groups API to collect all projects under a group or namespace' },
+              { step: '02', label: 'Concurrent analysis', detail: 'Worker pool fans out API calls — languages, file tree, and pipeline history — concurrently per project' },
+              { step: '03', label: 'Tool fingerprinting', detail: 'File tree walk matches against known tool signatures (e.g., Dockerfile, Makefile, go.mod, package.json, .terraform)' },
+              { step: '04', label: 'Pipeline scoring', detail: 'Last N pipeline runs scored by success rate, duration p50/p95, and staleness — surfacing unhealthy projects' },
+              { step: '05', label: 'Report output', detail: 'Structured results emitted as JSON for downstream tooling or rendered as a terminal table with colour-coded health indicators' },
+            ].map(({ step, label, detail }) => (
+              <div class="flex gap-4 text-sm">
+                <span class="font-mono shrink-0 mt-0.5" style="color:#D4A017;">{step}</span>
+                <div>
+                  <span class="font-semibold" style="color:#E8EDF5;">{label}</span>
+                  <span style="color:#7A8BA8;"> — {detail}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Key decisions -->
+      <div class="animate-fade-in-up animate-delay-300">
+        <h2 class="text-xl font-bold mb-4" style="color:#E8EDF5;">Key Decisions</h2>
+        <div class="space-y-4">
+          {[
+            {
+              q: 'Why Go?',
+              a: 'Concurrency is the core performance requirement — analysing hundreds of projects means hundreds of API calls that should run in parallel. Go\'s goroutines and channels make this straightforward to implement correctly without the overhead of async frameworks. A single statically-linked binary also makes distribution easy.',
+            },
+            {
+              q: 'Why tool detection via file tree rather than CI config alone?',
+              a: 'Many projects have incomplete or misconfigured CI pipelines. Using the file tree as ground truth means the tool detects what\'s actually present — Docker, Terraform, a test runner — regardless of whether it\'s wired into the pipeline. This distinction between "tool is present" and "tool is used in CI" is itself a useful signal.',
+            },
+            {
+              q: 'What does "consistent use of tools" actually mean?',
+              a: 'The tool computes a per-namespace fingerprint: the set of tools detected across all projects. Projects that deviate significantly from the norm — missing a linter every other project uses, or using a different container registry — are flagged. This operationalises "consistency" without requiring teams to manually define a policy.',
+            },
+          ].map(({ q, a }) => (
+            <div class="glass-card p-5">
+              <div class="font-semibold mb-2" style="color:#E8EDF5;">{q}</div>
+              <p class="text-sm" style="color:#7A8BA8;">{a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="glass-card p-6 animate-fade-in-up animate-delay-400" style="border-color:rgba(212,160,23,0.3);">
+        <h2 class="font-mono text-sm mb-3" style="color:#D4A017;">STATUS</h2>
+        <div class="space-y-2">
+          {[
+            ['done', 'GitLab API client — authentication, pagination, rate-limit handling'],
+            ['done', 'Project enumeration via Groups API'],
+            ['done', 'Language detection per project'],
+            ['progress', 'Tool fingerprinting via file tree walk'],
+            ['progress', 'Pipeline metrics collection and scoring'],
+            ['todo', 'Cross-project consistency scoring and deviation flags'],
+            ['todo', 'Terminal table output with colour-coded health indicators'],
+            ['todo', 'JSON output mode for CI/CD integration'],
+          ].map(([status, item]) => (
+            <div class="flex items-center gap-3 text-sm">
+              <span style={`color:${status === 'done' ? '#10B981' : status === 'progress' ? '#D4A017' : '#7A8BA8'}`}>
+                {status === 'done' ? '✓' : status === 'progress' ? '◐' : '○'}
+              </span>
+              <span style={`color:${status === 'todo' ? '#7A8BA8' : '#E8EDF5'}`}>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>
